@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+<div class="container">
+        <h2 class="text-center mt-5 mb-3">Editer User</h2>
+        <div class="card">
+            <div class="card-header">
+             {% if (app.user.roles[0] is same as('ROLE_ADMIN')) %}
+
+                <a class="btn btn-outline-info float-right" href="{{ path('app_user_index') }}"> 
+                    Voir tout les Users
+                </a>
+            {% else %}
+                <h5>Modifier Profile</h5>
+                {% endif %}
+            </div>
+            <div class="card-body">
+                {% include 'user/_form.html.twig' with {'button_label': 'MAJ User', 'button_color': 'btn-outline-success'}  %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

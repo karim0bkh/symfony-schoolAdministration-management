@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+
+
+
+
+
+
+<div class="container">
+        <h2 class="text-center mt-5 mb-3">Users Manager</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-primary" href="{{ path('app_user_new') }}"> 
+                    Créer un nouveau User 
+                </a>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Email</th>
+                        <th>Roles</th>
+                        <th>Mot de passe</th>
+                        <th>Nom Penom</th>
+                        <th>Matricule</th>
+                        <th>Filliere</th>
+                        <th>Type</th>
+                        <th width="240px">Action</th>
+                    </tr>
+                    {% for user in users %}
+                    <tr>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles[0]}}</td>
+                <td>{{ user.password[:5] ~ '...'}}</td>
+                <td>{{ user.fullname }}</td>
+                <td>{{ user.matricule }}</td>
+                <td>{{ user.filliere }}</td>
+                <td>{{ user.type }}</td>                        
+                <td>
+                            <form method="post" action="{{ path('app_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <a
+                                    class="btn btn-outline-info mt-2"
+                                    href="{{ path('app_user_show', {'id': user.id}) }}">
+                                    Afficher
+                                </a>
+                                <a
+                                    class="btn btn-outline-success mt-2"
+                                    href="{{ path('app_user_edit', {'id': user.id}) }}">
+                                    Editer
+                                </a>
+  
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                                <button class="btn btn-outline-danger mt-2">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+{% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Company{% endblock %}
+
+{% block body %}
+
+
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3">Editer Entreprise</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-info float-right" href="{{ path('app_company_index') }}"> 
+                    Voir tout les Entreprises
+                </a>
+            </div>
+            <div class="card-body">
+                {% include 'company/_form.html.twig' with {'button_label': 'MAJ Entreprise', 'button_color': 'btn-outline-success'}  %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

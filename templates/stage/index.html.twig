@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stage{% endblock %}
+
+{% block body %}
+
+        <div class="container">
+        <h2 class="text-center mt-5 mb-3">Stage Manager</h2>
+        <div class="card">
+            <div class="card-header">
+            {% if (app.user.roles[0] is same as('ROLE_PROF')) or (app.user.roles[0] is same as('ROLE_ADMIN')) %}
+                <a class="btn btn-outline-primary" href="{{ path('app_stage_new') }}"> 
+                    Créer un nouveau Stage 
+                </a>
+            {% else %}
+            <h5>Listes des entreprises</h5>
+            {% endif %}
+
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Nom Prenom</th>
+                        <th>Description</th>
+                        <th>Date Debut</th>
+                        <th>Date Fin</th>
+                        <th>Entreprise</th>
+                        <th width="240px">Action</th>
+                    </tr>
+                    {% for stage in stages %}
+                    <tr>
+                        <td>{{ stage.name }}</td>
+                        <td>{{ stage.description }}</td>
+                        <td>{{ stage.dateDebut ? stage.dateDebut|date('Y-m-d') : '' }}</td>
+                        <td>{{ stage.dateFin ? stage.dateFin|date('Y-m-d') : '' }}</td>
+                        <td>{{ (stage.company).name }}</td>
+
+                        <td>
+                            <form method="post" action="{{ path('app_stage_delete', {'id': stage.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <a
+                                    class="btn btn-outline-info mt-2"
+                                    href="{{ path('app_stage_show', {'id': stage.id}) }}">
+                                    Afficher
+                                </a>
+                            {% if (app.user.roles[0] is same as('ROLE_PROF')) or (app.user.roles[0] is same as('ROLE_ADMIN')) %}
+
+                                <a
+                                    class="btn btn-outline-success mt-2"
+                                    href="{{ path('app_stage_edit', {'id': stage.id}) }}">
+                                    Editer
+                                </a>
+  
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ stage.id) }}">
+                                <button class="btn btn-outline-danger mt-2">supprimer</button>
+                            {% endif %}
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

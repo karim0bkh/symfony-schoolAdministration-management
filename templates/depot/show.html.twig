@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Depot{% endblock %}
+
+{% block body %}
+
+
+
+<div class="container">
+        <h2 class="text-center mt-5 mb-3">Afficher Depot</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-info float-right" href="{{ path('app_depot_index') }}"> 
+                    Voir tout les Depots
+                </a>
+            </div>
+            <div class="card-body">
+                <b class="text-muted">Nom Prenom:</b>
+                <p>{{ depot.fullname }}</p>
+                <b class="text-muted">Matricule:</b>
+                <p>{{ depot.matricule }}</p>
+                <b class="text-muted">Type:</b>
+                <p>{{ depot.type }}</p>
+                <b class="text-muted">Document:</b>
+                <p><a target="_blank"  href="{{ asset('uploads/depot/' ~ depot.file) }}">{{ depot.file }}</a></p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

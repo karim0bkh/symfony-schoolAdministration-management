@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer Planning{% endblock %}
+
+{% block body %}
+
+
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3">Editer Planning</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-info float-right" href="{{ path('app_planning_index') }}"> 
+                    Voir tout les Plannings
+                </a>
+            </div>
+            <div class="card-body">
+                {% include 'planning/_form.html.twig' with {'button_label': 'MAJ Plannings', 'button_color': 'btn-outline-success'}  %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

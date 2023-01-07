@@ -1,0 +1,39 @@
+ 
+ <h1>Lettre D'affectation</h1>
+ 
+ <h1>Ecole PolyTechnique Sousse</h1>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>POLY</title>
+</head>
+<body>
+    <div style="margin: 0 auto;display: block;width: 500px;">
+        <table width="100%" border="1">
+            
+            <tr>
+                <td>Nom Prenom:</td>
+                <td>{{ demande.fullname }}</td>
+            </tr>
+            <tr>
+                <td>Matricule:</td>
+                <td>{{ demande.matricule }}</td>
+            </tr>
+            <tr>
+                <td>Date de naissance:</td>
+                <td>{{ demande.birthdate ? demande.birthdate|date('Y-m-d') : ''  }}</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>{{ demande.email }}</td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <img src="{{ qrcode['simple'] }}" />
+    </div>
+</body>
+</html>

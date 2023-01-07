@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entreprises{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3">Entreprises Manager</h2>
+        <div class="card">
+            <div class="card-header">
+            {% if (app.user.roles[0] is same as('ROLE_PROF')) or (app.user.roles[0] is same as('ROLE_ADMIN')) %}
+
+                <a class="btn btn-outline-primary" href="{{ path('app_company_new') }}"> 
+                    Créer une nouvelle Entreprise 
+                </a>
+                {% else %}
+                    <h5>Listes des Entreprises</h5>
+                {% endif %}  
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Address</th>
+                        <th>Ville</th>
+                        <th>Email</th>
+                        <th width="240px">Action</th>
+                    </tr>
+                    {% for company in companies %}
+                    <tr>
+                        <td>{{ company.name }}</td>
+                        <td>{{ company.address }}</td>
+                        <td>{{ company.city }}</td>
+                        <td>{{ company.email}}</td>
+                        <td>
+                            <form method="post" action="{{ path('app_company_delete', {'id': company.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <a
+                                    class="btn btn-outline-info mt-2"
+                                    href="{{ path('app_company_show', {'id': company.id}) }}">
+                                    Afficher
+                                </a>
+                            {% if (app.user.roles[0] is same as('ROLE_PROF')) or (app.user.roles[0] is same as('ROLE_ADMIN')) %}
+
+                                <a
+                                    class="btn btn-outline-success mt-2"
+                                    href="{{ path('app_company_edit', {'id': company.id}) }}">
+                                    Editer
+                                </a>
+  
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ company.id) }}">
+                                <button class="btn btn-outline-danger mt-2">Supprimer</button>
+                            {% endif %}
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

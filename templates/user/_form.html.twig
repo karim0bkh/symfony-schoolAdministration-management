@@ -1,0 +1,32 @@
+{{ form_start(form) }}
+    <div class="form-group">
+        {{ form_row(form.fullname, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.matricule, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.filliere, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    {% if app.user.roles[0] is same as('ROLE_ADMIN') %}
+
+    <div class="form-group">
+        {{ form_row(form.type, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    {% else %}
+    
+    <div class="form-group readonly ">
+        {{ form_row(form.type, {'attr': {'class': 'form-control' , 'readonly' : true }}) }}
+    </div>
+
+    {% endif %}
+    <div class="form-group">
+        {{ form_row(form.password, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <button class="btn {{ button_color|default('btn-outline-primary') }}  mt-3">{{ button_label|default('Enregistrer User') }}</button>
+{{ form_end(form) }}
+
+{{ form_end(form) }}

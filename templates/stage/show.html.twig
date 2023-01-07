@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stage{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3">Afficher Stage</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-info float-right" href="{{ path('app_stage_index') }}"> 
+                    Voir tout les Stages
+                </a>
+            </div>
+            <div class="card-body">
+                <b class="text-muted">Nom Prenom:</b>
+                <p>{{ stage.name }}</p>
+                <b class="text-muted">Description:</b>
+                <p>{{ stage.description }}</p>
+                <b class="text-muted">Date Debut:</b>
+                <p>{{ stage.dateDebut ? stage.dateDebut|date('Y-m-d') : '' }}</p>
+                <b class="text-muted">Date Fin:</b>
+                <p>{{ stage.dateFin ? stage.dateDebut|date('Y-m-d') : '' }}</p>
+                <b class="text-muted">Entreprise:</b>
+                <p>{{ (stage.company).name }}</p>
+
+            </div>
+            
+        </div>
+    </div>
+
+{% endblock %}

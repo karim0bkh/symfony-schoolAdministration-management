@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Depot{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3">Créer un nouveau Depot</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-info float-right" href="{{ path('app_depot_index') }}"> 
+                    Voir tout les Depot
+                </a>
+            </div>
+            <div class="card-body">
+                 {{ include('depot/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

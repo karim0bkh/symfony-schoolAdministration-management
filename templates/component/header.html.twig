@@ -1,0 +1,89 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">PROJET SF</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor02" style="margin-left:2rem;">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="/">Accueil
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+        {% if app.user %}
+        {% if app.user.roles[0] is same as('ROLE_ETUDIANT')  %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{path('app_stage_index')}}">Stages</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{path('app_company_index')}}">Entreprises</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{path('app_planning_index')}}">Plannings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{path('app_demande_index')}}">Mes Demandes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{path('app_depot_index')}}">Mes Depots</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{path('app_document_index')}}">Documents partagés</a>
+        </li>
+        {% endif %}
+        {% if (app.user.roles[0] is same as('ROLE_PROF')) or (app.user.roles[0] is same as('ROLE_ADMIN')) %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{path('app_company_index')}}">Entreprises</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{path('app_stage_index')}}">Stages</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{path('app_planning_index')}}">Plannings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{path('app_demande_index')}}">Demandes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{path('app_depot_index')}}">Depots</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{path('app_document_index')}}">Documents partagés</a>
+        </li>
+                {% if app.user.roles[0] is same as('ROLE_ADMIN')  %}
+
+        <li class="nav-item">
+          <a class="nav-link" href="{{path('app_user_index')}}">Gestion Users</a>
+        </li>
+
+        {% endif %}
+        {% endif %}
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{path('app_login')}}">Connexion</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{path('app_register')}}">Inscription</a>
+        </li>
+        {% endif %}
+
+        
+      </ul>
+      {% if app.user %}
+      <div class="d-flex">
+        <div class="dropdown" style="margin-right : 3rem;">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            {{app.user.fullname}}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="{{path('app_user_edit',{id:app.user.id})}}">Modifier Profile</a></li>
+            <li><a class="dropdown-item" href="{{path('app_logout')}}">Deconnexion</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      {% endif %}
+    </div>
+  </div>
+</nav>

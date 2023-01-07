@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demande{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3">Demandes Manager</h2>
+        <div class="card">
+            <div class="card-header">
+
+                <a class="btn btn-outline-primary" href="{{ path('app_demande_new') }}"> 
+                    Créer une nouvelle Demande 
+                </a>
+
+
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Nom Prenom</th>
+                        <th>Matricule</th>
+                        <th>Email</th>
+                        <th>Date de naissance</th>
+                        <th>Type</th>
+                        <th width="240px">Action</th>
+                    </tr>
+                    {% for demande in demandes %}
+                    <tr>
+                        <td>{{ demande.fullname }}</td>
+                        <td>{{ demande.matricule }}</td>
+                        <td>{{ demande.email }}</td>
+                        <td>{{ demande.birthdate ? demande.birthdate|date('Y-m-d') : '' }}</td>
+                        <td>{{ demande.type }}</td>
+                        <td>
+                            <form method="post" action="{{ path('app_demande_delete', {'id': demande.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <a
+                                    class="btn btn-outline-info mt-2"
+                                    href="{{ path('app_demande_show', {'id': demande.id}) }}">
+                                    Afficher
+                                </a>
+
+                                <a
+                                    class="btn btn-outline-success mt-2"
+                                    href="{{ path('app_demande_edit', {'id': demande.id}) }}">
+                                    Editer
+                                </a>
+
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ demande.id) }}">
+                                <button class="btn btn-outline-danger mt-2">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

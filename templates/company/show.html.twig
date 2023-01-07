@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entreprise{% endblock %}
+
+{% block body %}
+
+<div class="container">
+        <h2 class="text-center mt-5 mb-3">Afficher Entreprise</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-info float-right" href="{{ path('app_company_index') }}"> 
+                    Voir tout les Entreprises
+                </a>
+            </div>
+            <div class="card-body">
+                <b class="text-muted">Nom:</b>
+                <p>{{ company.name }}</p>
+                <b class="text-muted">Address:</b>
+                <p>{{ company.address }}</p>
+                <b class="text-muted">Ville:</b>
+                <p>{{ company.city }}</p>
+                <b class="text-muted">Email:</b>
+                <p>{{ company.email }}</p>
+            </div>
+        </div>
+    </div>{% endblock %}

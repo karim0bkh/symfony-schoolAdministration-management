@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Planning{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3">Afficher Planning</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-info float-right" href="{{ path('app_planning_index') }}"> 
+                    Voir tout les Plannings
+                </a>
+            </div>
+            <div class="card-body">
+                <b class="text-muted">Nom:</b>
+                <p>{{ planning.name }}</p>
+                <b class="text-muted">Description:</b>
+                <p>{{ planning.description }}</p>
+                <b class="text-muted">Date:</b>
+                <p>{{ planning.date ? planning.date|date('Y-m-d') : '' }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

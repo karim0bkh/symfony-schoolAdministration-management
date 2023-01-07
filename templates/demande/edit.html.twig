@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer Demande{% endblock %}
+
+{% block body %}
+
+
+
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3">Editer Demande</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-info float-right" href="{{ path('app_demande_index') }}"> 
+                    Voir tout les Demandes
+                </a>
+            </div>
+            <div class="card-body">
+                {% include 'demande/_form.html.twig' with {'button_label': 'MAJ Demande', 'button_color': 'btn-outline-success'}  %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

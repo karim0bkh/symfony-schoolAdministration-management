@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Stage{% endblock %}
+
+{% block body %}
+
+<div class="container">
+        <h2 class="text-center mt-5 mb-3">Créer stage</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-info float-right" href="{{ path('app_stage_index') }}"> 
+                    Voir tout les Stages
+                </a>
+            </div>
+            <div class="card-body">
+                 {{ include('stage/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

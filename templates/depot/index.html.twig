@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Depot{% endblock %}
+
+{% block body %}
+
+        <div class="container">
+        
+
+        <h2 class="text-center mt-5 mb-3">Depots Manager</h2>
+
+
+            {% if (app.user.roles[0] is same as('ROLE_PROF')) or (app.user.roles[0] is same as('ROLE_ADMIN')) %}
+
+               
+
+<div class="container">
+        <div class="card">
+            <div class="card-header">
+                Recherche par Matricule
+            </div>
+            <div class="card-body">
+  <form method='POST'>
+
+                <input class= 'form-control' type="text" name="key_word">
+            
+                <input class="btn btn-outline-warning float-right mt-4" type="submit" value="Recherche">
+            </form>            </div>
+        </div>
+    </div>
+
+               
+                {% endif %}  
+
+
+
+
+
+         <br>
+                    
+
+                  
+        <br>
+        <div class="card">
+                   
+            <div class="card-header">
+                <a class="btn btn-outline-primary" href="{{ path('app_depot_new') }}"> 
+                    Créer un nouveau Depot 
+                </a>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Nom Prenom</th>
+                        <th>Matricule</th>
+                        <th>Type</th>
+                        <th>Document</th>
+                        <th width="240px">Action</th>
+                    </tr>
+                    {% for depot in depots %}
+                    <tr>
+                        <td>{{ depot.fullname }}</td>
+                        <td>{{ depot.matricule }}</td>
+                        <td>{{ depot.type}}</td>
+                        <td>{{ depot.file}}</td>
+                        <td>
+                            <form method="post" action="{{ path('app_depot_delete', {'id': depot.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <a
+                                    class="btn btn-outline-info mt-2"
+                                    href="{{ path('app_depot_show', {'id': depot.id}) }}">
+                                    Afficher
+                                </a>
+                                <a
+                                    class="btn btn-outline-success mt-2"
+                                    href="{{ path('app_depot_edit', {'id': depot.id}) }}">
+                                    Editer
+                                </a>
+  
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ depot.id) }}">
+                                <button class="btn btn-outline-danger mt-2">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demande{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h2 class="text-center mt-5 mb-3">Afficher demande</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-info float-right" href="{{ path('app_demande_index') }}"> 
+                    Voir tout les Demandes
+                </a>
+            </div>
+            <div class="card-body">
+                <b class="text-muted">Nom Prenom:</b>
+                <p>{{ demande.fullname }}</p>
+                <b class="text-muted">Matricule:</b>
+                <p>{{ demande.matricule }}</p>
+                <b class="text-muted">Email:</b>
+                <p>{{ demande.email}}</p>
+                <b class="text-muted">Date de naissance:</b>
+                <p>{{ demande.birthdate ? demande.birthdate|date('Y-m-d') : '' }}</p>
+                <b class="text-muted">Type (Type1 : Document de stage , Type2 : Lettre d’affectation):</b>
+                <p>{{ demande.type }}</p>
+             {% if (app.user.roles[0] is same as('ROLE_PROF')) or (app.user.roles[0] is same as('ROLE_ADMIN')) %}
+
+                <a class="btn btn-warning float-right" href="{{ path('app_pdf_generator', {'id': demande.id}) }}"> 
+                    Générer PDF
+                </a>
+                {% endif %}
+            </div>
+            
+        </div>
+    </div>
+
+{% endblock %}

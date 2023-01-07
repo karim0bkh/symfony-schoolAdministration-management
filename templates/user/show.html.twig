@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+
+<div class="container">
+        <h2 class="text-center mt-5 mb-3">Afficher User</h2>
+        <div class="card">
+            <div class="card-header">
+                <a class="btn btn-outline-info float-right" href="{{ path('app_user_index') }}"> 
+                    Voir tout les Users
+                </a>
+            </div>
+            <div class="card-body">
+                <b class="text-muted">Email:</b>
+                <p>{{ user.email }}</p>
+                <b class="text-muted">Nom Prenom:</b>
+                <p>{{ user.fullname }}</p>
+                <b class="text-muted">Matricule:</b>
+                <p>{{ user.matricule }}</p>
+                <b class="text-muted">Roles:</b>
+                <p>{{ user.roles ? user.roles|json_encode : '' }}</p>
+                <b class="text-muted">Mot de passe:</b>
+                <p>{{ user.password }}</p>
+                <b class="text-muted">Filliere:</b>
+                <p>{{ user.filliere }}</p>
+                <b class="text-muted">Type:</b>
+                <p>{{ user.type }}</p>
+                
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    
+{% endblock %}
