@@ -1,0 +1,1 @@
+# symfony-schoolAdministration-management
